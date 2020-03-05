@@ -1,4 +1,4 @@
-/* 
+
 jQuery('video').each( function (){
 	if(this.id == ''){
 		//make sure its unique
