@@ -1,11 +1,11 @@
 jQuery( document ).ready( function(){
 jQuery('video').each( function (){
-	
+	//new Gutenberg videos/audio don't recive an Id just create one a 36 string should be unique enough
 	if(this.id == ''){
 		//make sure its unique
 		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);		
 	}
-		//don't know why but just remove it
+		//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width
 		jQuery(this).attr('height',this.offsetHeight);
 		jQuery(this).attr('width',this.offsetWidth );
 	
@@ -24,12 +24,12 @@ jQuery('video').each( function (){
 });
 
 jQuery('audio').each( function (){
-	
+	//new Gutenberg videos/audio don't recive an Id just create one a 36 string should be unique enough
 	if(this.id == ''){
 		//make sure its unique
 		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);		
 	}
-		//don't know why but just remove it
+		//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width
 		jQuery(this).attr('height',this.offsetHeight);
 		jQuery(this).attr('width',this.offsetWidth );
 	

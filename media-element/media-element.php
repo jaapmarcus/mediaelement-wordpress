@@ -7,15 +7,10 @@ Author: John Dyer, Jaap Marcus
 Version: 4.2.8
 Author URI: https://mediaelementjs.com/
 License: MIT
-*/
-
-
-	
-		
+*/		
 /*
 	Add Media Elements CSS belongs in head	
 */
-
 function mejs_add_header(){
 	if(!is_admin()){
 		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/files/mediaelementplayer.css"), array(), "4.2.14", false);
@@ -43,8 +38,10 @@ function override_video()
 {
     remove_shortcode('video');
     add_shortcode('video', 'mjs_video');
+    add_shortcode('mejsvideo', 'mjs_video');
     remove_shortcode('audio');
     add_shortcode('audio', 'mjs_audio');
+    add_shortcode('mejsaudio', 'mjs_audio');
 }
 
 if(!is_admin()){
@@ -368,10 +365,6 @@ function mjs_audio($attr, $content = ''){
 	 */
 	$library = apply_filters( 'wp_audio_shortcode_library', 'mediaelement' );
 
-	if ( 'mediaelement' === $library && did_action( 'init' ) ) {
-		wp_enqueue_style( 'wp-mediaelement' );
-		wp_enqueue_script( 'wp-mediaelement' );
-	}
 
 	/**
 	 * Filters the class attribute for the audio shortcode output container.
@@ -407,10 +400,6 @@ function mjs_audio($attr, $content = ''){
 	}
 
 	$html = '';
-
-	if ( 'mediaelement' === $library && 1 === $instance ) {
-		$html .= "<!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->\n";
-	}
 
 	$html .= sprintf( '<audio %s controls="controls">', join( ' ', $attr_strings ) );
 
