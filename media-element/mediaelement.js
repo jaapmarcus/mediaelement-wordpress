@@ -29,13 +29,10 @@ jQuery('audio').each( function (){
 		//make sure its unique
 		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);		
 	}
-		//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width
-		jQuery(this).attr('height',this.offsetHeight);
-		jQuery(this).attr('width',this.offsetWidth );
 	
 			var settings = { 
 				pluginPath : mediaelementjs.pluginPath,
-				stretching : 'responsive',
+				stretching : 'fill',
 				defaultVideoWidth: '100%',
             defaultVideoHeight: '100%',
              videoWidth: '100%',

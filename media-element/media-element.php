@@ -34,6 +34,7 @@ add_action('wp_footer','mejs_add_footer');
 //to remove all Wordpress MJS we need to overwrite default video tag
 function removeMediaElements()
 {
+	//allow use of wp me in admin
 	if(!is_admin()){
 		wp_deregister_script('mediaelement');
 	}
