@@ -3,14 +3,19 @@ Media Elements plugin for Wordpress
 
 This version is still in test / development status please do not use yet...
 
-Due to changes in Wordpress the old plugin didn't work any more
+This plugin only modifies the default behaviour of Wordpress. No additional options are currently added the software and some parts have been removed.
 
-* No support for Gutenburg Blocks
-* Outdated plugin it self
-* Strange resizing errors with the standaard 2020 theme. 
+Due the fact Wordpress uses 2 different methods
 
-Still items to be fixed:
+Gutenberg Editor / New Style Editor
 
-* Support for Audio
+* Adds Media Elements player as an additional over the video element there for the following options are currently not supported
++ Multiple sources see https://github.com/WordPress/gutenberg/issues/9457 / https://github.com/WordPress/gutenberg/issues/9457
++ Support for tracks / Closed captions https://github.com/WordPress/gutenberg/issues/7673
 
-And probally many more
+The Classic style editor
+
++ Currently no support for Vimeo. 
++ Due to outside of control of Wordpress multiple renders can be added.
++ In the old plugin you where able to set to disable controls, progress bar and ect currently not posible.
+
