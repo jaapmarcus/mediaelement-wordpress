@@ -1413,7 +1413,7 @@ Object.assign(_player2.default.prototype, {
 
 			if (isNative) {
 				t.node.style.width = t.normalWidth + 'px';
-				t.node.style.height = t.normalHeight + 'px';
+				t.node.style.height = t.normalHeight + 'px';			
 			} else {
 				var elements = t.getElement(t.container).querySelectorAll('embed, object, video'),
 				    _total2 = elements.length;
