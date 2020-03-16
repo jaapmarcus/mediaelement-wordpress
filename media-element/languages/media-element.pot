@@ -1,5 +1,6 @@
 # Copyright (C) 2020 John Dyer, Jaap Marcus
 # This file is distributed under the same license as the MediaElement.js - HTML5 Audio and Video plugin.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaElement.js - HTML5 Audio and Video 4.2.8\n"
@@ -9,13 +10,86 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-03-12T16:22:49+00:00\n"
+"POT-Creation-Date: 2020-03-16 22:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Domain: media-element\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+
+#: media-element.php:69 media-element.php:216
+msgid "MediaElement JS Settings"
+msgstr ""
+
+#: media-element.php:70
+msgid "MediaElement JS"
+msgstr ""
+
+#: media-element.php:85
+msgid "Settings"
+msgstr ""
+
+#: media-element.php:91 media-element.php:113
+msgid "Advanced"
+msgstr ""
+
+#. id
+#: media-element.php:97 media-element.php:123
+msgid "Additional Plugins / Renderers"
+msgstr ""
+
+#: media-element.php:106 media-element.php:158
+msgid "Features"
+msgstr ""
+
+#: media-element.php:134
+msgid "Additional settings can be loaded when necessary."
+msgstr ""
+
+#: media-element.php:135
+msgid "The Syntax for those settings are a valid json string"
+msgstr ""
+
+#: media-element.php:137
+msgid "This example will not pause any other player in the page"
+msgstr ""
+
+#: media-element.php:138 media-element.php:172
+msgid "When empty default settings are used"
+msgstr ""
+
+#: media-element.php:147
+msgid ""
+"Please provide a comma separated list with all the required plugins / "
+"renderers"
+msgstr ""
+
+#: media-element.php:148
+msgid "Renderers"
+msgstr ""
+
+#: media-element.php:148
+msgid "Plugins"
+msgstr ""
+
+#: media-element.php:161
+msgid "Provide a comma separated with the wanted features."
+msgstr ""
+
+#: media-element.php:162
+msgid "By default the following options are available."
+msgstr ""
 
 #. Plugin Name of the plugin
 msgid "MediaElement.js - HTML5 Audio and Video"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Video and audio plugin for WordPress built on MediaElement.js HTML5 video "
+"and audio player library. Embeds media in your post or page using HTML5 with "
+"Flash or Silverlight fallback support for non-HTML5 browsers. Video support: "
+"MP4, Ogg, WebM, WMV. Audio support: MP3, WMA, WAV"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -23,44 +97,6 @@ msgstr ""
 msgid "https://mediaelementjs.com/"
 msgstr ""
 
-#. Description of the plugin
-msgid "Video and audio plugin for WordPress built on MediaElement.js HTML5 video and audio player library. Embeds media in your post or page using HTML5 with Flash or Silverlight fallback support for non-HTML5 browsers. Video support: MP4, Ogg, WebM, WMV. Audio support: MP3, WMA, WAV"
-msgstr ""
-
 #. Author of the plugin
 msgid "John Dyer, Jaap Marcus"
-msgstr ""
-
-#: media-element.php:53
-#: media-element.php:138
-msgid "MediaElement JS Settings"
-msgstr ""
-
-#: media-element.php:54
-msgid "MediaElement JS"
-msgstr ""
-
-#: media-element.php:69
-msgid "Settings"
-msgstr ""
-
-#: media-element.php:77
-#: media-element.php:93
-msgid "Features"
-msgstr ""
-
-#: media-element.php:84
-msgid "Advanced"
-msgstr ""
-
-#: media-element.php:96
-msgid "Provide a comma separated with the wanted features."
-msgstr ""
-
-#: media-element.php:97
-msgid "By default the following options are available."
-msgstr ""
-
-#: media-element.php:107
-msgid "When empty default settings are used"
 msgstr ""

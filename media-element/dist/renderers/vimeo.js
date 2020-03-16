@@ -33,13 +33,29 @@ var VimeoApi = {
 	},
 
 	getVimeoId: function getVimeoId(url) {
-		if (url === undefined || url === null) {
+		if (url == null) {
 			return null;
 		}
 
 		var parts = url.split('?');
 		url = parts[0];
-		return parseInt(url.substring(url.lastIndexOf('/') + 1), 10);
+
+		var playerLinkMatch = url.match(/https:\/\/player.vimeo.com\/video\/(\d+)$/);
+		if (playerLinkMatch) {
+			return parseInt(playerLinkMatch[1], 10);
+		}
+
+		var vimeoLinkMatch = url.match(/https:\/\/vimeo.com\/(\d+)$/);
+		if (vimeoLinkMatch) {
+			return parseInt(vimeoLinkMatch[1], 10);
+		}
+
+		var privateVimeoLinkMatch = url.match(/https:\/\/vimeo.com\/(\d+)\/\w+$/);
+		if (privateVimeoLinkMatch) {
+			return parseInt(privateVimeoLinkMatch[1], 10);
+		}
+
+		return NaN;
 	}
 };
 

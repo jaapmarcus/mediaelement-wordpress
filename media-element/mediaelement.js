@@ -1,21 +1,18 @@
 jQuery( document ).ready( function(){
+	
 	jQuery('video').each( function (){
 	//new Gutenberg videos/audio don't recive an Id just create one a 36 string should be unique enough
 	if(this.id == ''){
 		//make sure its unique
 		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);		
 	}
-		//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width
-		jQuery(this).attr('height',this.offsetHeight);
-		jQuery(this).attr('width',this.offsetWidth );
+//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width;
 		
+		console.log(this.offsetWidth, this.offsetHeight);
+				
 			var settings = { 
-				pluginPath : mediaelementjs.pluginPath,
-				stretching : 'responsive',
-				defaultVideoWidth: '100%',
-            defaultVideoHeight: '100%',
-             videoWidth: '100%',
-            videoHeight: '100%'
+				stretching : "fill",
+				pluginPath : mediaelementjs.pluginPath
 			}
 		
 			//console.log(mediaelementjs.options.features);
@@ -34,11 +31,13 @@ jQuery( document ).ready( function(){
 			var advanced = JSON.parse(mediaelementjs.options.advanced);
 			
 			const newSettings = {...advanced,...settings};
-			console.log(newSettings);
+
+			//console.log(newSettings);
 			
 	player =  new MediaElementPlayer(this.id,newSettings);
-	});
+	console.log(newSettings);
 
+	});
 jQuery('audio').each( function (){
 	//new Gutenberg videos/audio don't recive an Id just create one a 36 string should be unique enough
 	if(this.id == ''){
@@ -51,11 +50,6 @@ jQuery('audio').each( function (){
 		
 			var settings = { 
 				pluginPath : mediaelementjs.pluginPath,
-				stretching : 'responsive',
-				defaultVideoWidth: '100%',
-            defaultVideoHeight: '100%',
-             videoWidth: '100%',
-            videoHeight: '100%'
 			}
 		
 			//console.log(mediaelementjs.options.features);
@@ -74,9 +68,11 @@ jQuery('audio').each( function (){
 			var advanced = JSON.parse(mediaelementjs.options.advanced);
 			
 			const newSettings = {...advanced,...settings};
-			console.log(newSettings);
+			//console.log(newSettings);
 			
-	player =  new MediaElementPlayer(this.id,newSettings);
+			player =  new MediaElementPlayer(this.id,newSettings);
+
+	
 	});
 
 

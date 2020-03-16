@@ -847,7 +847,7 @@ var MediaElement = function MediaElement(idOrNode, options, sources) {
 		var renderInfo = _renderer.renderer.select(mediaFiles, t.mediaElement.options.renderers.length ? t.mediaElement.options.renderers : []),
 		    event = void 0;
 
-		if (!t.mediaElement.paused) {
+		if (!t.mediaElement.paused && !(t.mediaElement.src == null || t.mediaElement.src === '')) {
 			t.mediaElement.pause();
 			event = (0, _general.createEvent)('pause', t.mediaElement);
 			t.mediaElement.dispatchEvent(event);
@@ -859,7 +859,8 @@ var MediaElement = function MediaElement(idOrNode, options, sources) {
 			return;
 		}
 
-		return mediaFiles[0].src ? t.mediaElement.changeRenderer(renderInfo.rendererName, mediaFiles) : null;
+		var shouldChangeRenderer = !(mediaFiles[0].src == null || mediaFiles[0].src === '');
+		return shouldChangeRenderer ? t.mediaElement.changeRenderer(renderInfo.rendererName, mediaFiles) : null;
 	},
 	    triggerAction = function triggerAction(methodName, args) {
 		try {
@@ -1017,7 +1018,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mejs = {};
 
-mejs.version = '4.2.14';
+mejs.version = '4.2.16';
 
 mejs.html5media = {
 	properties: ['volume', 'src', 'currentTime', 'muted', 'duration', 'paused', 'ended', 'buffered', 'error', 'networkState', 'readyState', 'seeking', 'seekable', 'currentSrc', 'preload', 'bufferedBytes', 'bufferedTime', 'initialTime', 'startOffsetTime', 'defaultPlaybackRate', 'playbackRate', 'played', 'autoplay', 'loop', 'controls'],

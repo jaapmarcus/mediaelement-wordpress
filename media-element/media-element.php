@@ -24,11 +24,20 @@ Class MediaElements {
 	
 	static public function addHeader(){
 		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/files/mediaelementplayer.css"), array(), "4.2.14", false);
+		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css?random=".rand(0,100000)), array(), "4.2.14", false);
 	}
 	static public function addFooter(){
-		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/files/mediaelement-and-player.js"), array(), "4.2.14");
+		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/files/mediaelement-and-player.js?random=".rand(0,100000)), array(), "4.2.14");
 		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js?random=".rand(0,100000)), array('jquery'), "4.2.14");
-		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => get_option('mediaelementjs')));
+		$options = get_option('mediaelementjs');
+		$scripts = explode(',',$options['extra']);
+		foreach($scripts as $script){
+			wp_enqueue_script(basename($script), $script,array(), "4.2.14");
+		}
+		
+		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => $options));
+		
+		
 	}
 	
 }
@@ -77,6 +86,19 @@ Class MediaElementsSettings {
 			array( $this, 'basic_info' ), // callback
 			'mediaelements-settings' // page
 		);
+		add_settings_section(
+			'mediaelements-settings-advanced', // id
+			__('Advanced','media-element'), // title
+			array( $this, 'advanced_info' ), // callback
+			'mediaelements-settings' // page
+		);
+		add_settings_section(
+			'mediaelements-settings-extra', // id
+			__('Additional Plugins / Renderers','media-element'), // title
+			array( $this, 'extra_info' ), // callback
+			'mediaelements-settings' // page
+		);
+
 		//options
 		//enabled features
 		add_settings_field(
@@ -91,9 +113,45 @@ Class MediaElementsSettings {
 			__('Advanced','media-element'), // title
 				array( $this, 'advanced' ), // callback
 			'mediaelements-settings',
-			'mediaelements-settings-features',
+			'mediaelements-settings-advanced',
 		);
+		
+
+		
+		add_settings_field(
+			'extra', // id
+			__('Additional Plugins / Renderers','media-element'), // title
+				array( $this, 'extra' ), // callback
+			'mediaelements-settings',
+			'mediaelements-settings-extra',
+		);		
+	
 	}
+
+function advanced_info(){
+		?>
+		<div class="">
+			<p><?php _e('Additional settings can be loaded when necessary.','media-element');?></p>
+			<p><?php _e('The Syntax for those settings are a valid json string','media-element');?></p>
+			<p>{ "pauseOtherPlayers":false}</p>
+			<p><?php _e('This example will not pause any other player in the page','media-element');?></p>
+			<p><?php _e('When empty default settings are used','media-element','media-element');?></p>
+		</div>
+		<?php
+	}
+
+
+	function extra_info(){
+	?>	
+		<div class="">
+			<p><?php _e('Please provide a comma separated list with all the required plugins / renderers','media-element');?></p>
+			<p><a href="https://github.com/mediaelement/mediaelement/tree/master/build/renderers"><?php _e('Renderers','media-element');?></a> <?php _e('or');?> <a href="https://github.com/mediaelement/mediaelement-plugins"><?php _e('Plugins','media-element');?></a></p>
+			<p><?php echo plugins_url('/media-element/files/');?></p>
+		</div>
+		<?php
+	}
+
+
 	
 	function basic_info(){
 		?>
@@ -124,6 +182,11 @@ Class MediaElementsSettings {
 		if ( isset( $input['advanced'] ) ) {
 			$sanitary_values['advanced'] = sanitize_text_field( $input['advanced'] );		
 		}
+		if ( isset( $input['extra'] ) ) {
+			$sanitary_values['extra'] = sanitize_text_field( $input['extra'] );		
+		}
+		
+		
 		return $sanitary_values;
 	}
 	
@@ -139,6 +202,14 @@ Class MediaElementsSettings {
 			isset( $this->settings['advanced'] ) ? esc_attr( $this->settings['advanced']) : ''
 		);
 	}	
+
+	function extra(){
+		printf(
+			'<textarea class="regular-text" type="text" name="mediaelementjs[extra]" id="extra">%s</textarea>',
+			isset( $this->settings['extra'] ) ? esc_attr( $this->settings['extra']) : ''
+		);
+	}	
+
 	function SettingsPage(){
 		?>
 		<div class="">
