@@ -8,7 +8,6 @@ Stable tag: 4.2.8
 
 MediaElement.js is an HTML5 video and audio player with Flash fallback and captions. Supports IE, Firefox, Opera, Safari, Chrome and iPhone, iPad, Android.
 
-==Still to be updated==
 == Description ==
 
 Video and audio plugin for WordPress built on the MediaElement.js HTML5 media player library. Provides Flash or Silverlight fallback players for non-HTML5 browsers. Supports iPhone, iPad, and Andriod.
@@ -96,25 +95,6 @@ Start playing the video as soon as it's ready.
 
     [video autoplay="true"]
 
-= fullscreen =
-Disables the fullscreen button
-
-    [video src="http://mysite.com/mymedia.mp4" fullscreen="false"]
-
-= duration =
-Disables the duration output
-
-    [video src="http://mysite.com/mymedia.mp4" duration="false"]
-
-= volume =
-Disables the volume slider
-
-    [video src="http://mysite.com/mymedia.mp4" volume="false"]
-
-= progress =
-Disables the progress bar
-
-    [video src="http://mysite.com/mymedia.mp4" progress="false"]
 
 = captions =
 URL to a WebSRT captions file
@@ -241,10 +221,6 @@ Check out <a href="http://mediaelementjs.com/">mediaElementjs.com</a> for more e
 = What does this get me over other HTML5 players? =
 
 Most HTML5 players offer one player to modern browsers and then a competely separate Flash player to older browser. This creates an inconsistent look and functionality.
-
-Instead, MediaElement.js upgrades older browsers, using Flash to mimic the entire HTML5 Media API. Then once all the browsers have something that looks like HTML5 Media, we build a consistent player on top using just HTML and CSS.
-
-See original blog post at <a href="http://johndyer.name/post/MediaElement-js-a-magic-unicorn-HTML5-video-library.aspx">johndyer.name</a> for a full explanation of MediaElement.js
 
 == Screenshots  ==
 

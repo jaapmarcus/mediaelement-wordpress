@@ -11,7 +11,7 @@ jQuery( document ).ready( function(){
 		console.log(this.offsetWidth, this.offsetHeight);
 				
 			var settings = { 
-				stretching : "fill",
+				stretching : "responsive",
 				pluginPath : mediaelementjs.pluginPath
 			}
 		
