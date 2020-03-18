@@ -7,7 +7,10 @@ jQuery( document ).ready( function(){
 		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);		
 	}
 //videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width;
-		
+		jQuery(this).attr('height',this.offsetHeight);
+		jQuery(this).attr('width',this.offsetWidth );
+		jQuery(this).attr('style','width:'+this.offsetWidth+'; height:'+this.offsetHeight);
+
 		console.log(this.offsetWidth, this.offsetHeight);
 				
 			var settings = { 
@@ -47,7 +50,7 @@ jQuery('audio').each( function (){
 		//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width
 		jQuery(this).attr('height',this.offsetHeight);
 		jQuery(this).attr('width',this.offsetWidth );
-		
+			
 			var settings = { 
 				pluginPath : mediaelementjs.pluginPath,
 			}
