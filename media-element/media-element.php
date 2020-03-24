@@ -11,38 +11,64 @@ Domain Path: /languages/
 License: MIT
 */		
 Class MediaElements {
-	static function init(){
+	var $options;
+	  function init(){
 		
+		$this -> options = get_option('mediaelementjs');
 		//remove WP Media Elements 
 		wp_deregister_script('mediaelement');
 			
 		//Add our own
-		add_action('wp_head',array('MediaElements', 'addHeader'));
-		add_action('wp_footer',array('MediaElements', 'addFooter'));
-
+		add_action('wp_head',array($this, 'addHeader'));
+		add_action('wp_footer',array($this, 'addFooter'));
+		
+		remove_shortcode('video');
+		add_shortcode('video', Array($this, 'Video'));
 	}
 	
-	static public function addHeader(){
+	  public function Video($args, $content = ''){
+		global $post;
+		if(!empty($this -> options['poster'])){
+		if(empty($args['poster'])){
+			if(has_post_thumbnail($post)){
+				$args['poster'] = get_the_post_thumbnail_url($post);
+			}else{
+				$args['poster'] = '';
+			}
+		}
+		}
+		if(!empty($this -> options['remove'])){
+			unset($args['width'],$args['height']);	
+		}
+		
+		return wp_video_shortcode( $args, $content);
+		
+	}	
+	
+	  public function addHeader(){
 		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/files/mediaelementplayer.css"), array(), "4.2.14", false);
 		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css?random=".rand(0,100000)), array(), "4.2.14", false);
 	}
-	static public function addFooter(){
+	  public function addFooter(){
 		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/files/mediaelement-and-player.js?random=".rand(0,100000)), array(), "4.2.14");
 		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js?random=".rand(0,100000)), array('jquery'), "4.2.14");
-		$options = get_option('mediaelementjs');
-		$scripts = explode(',',$options['extra']);
+		
+		$scripts = explode(',',$this -> options['extra']);
 		foreach($scripts as $script){
 			wp_enqueue_script(basename($script), $script,array(), "4.2.14");
 		}
 		
-		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => $options));
+		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => $this -> options));
 		
 		
 	}
 	
 }
 if(!is_admin()){
-	add_action('init', array('MediaElements','init'));
+	
+	$cls = new MediaElements();
+	
+	add_action('init', array($cls, 'init'));
 }	
 
 Class MediaElementsSettings {
@@ -101,6 +127,7 @@ Class MediaElementsSettings {
 
 		//options
 		//enabled features
+
 		add_settings_field(
 			'features', // id
 			__('Features','media-element'), // title
@@ -108,6 +135,23 @@ Class MediaElementsSettings {
 			'mediaelements-settings',
 			'mediaelements-settings-features',
 		);
+		add_settings_field(
+			'poster', // id
+			__('Poster','media-element'), // title
+				array( $this, 'poster' ), // callback
+			'mediaelements-settings',
+			'mediaelements-settings-features',
+		);
+		add_settings_field(
+			'remove', // id
+			__('Remove width / height','media-element'), // title
+				array( $this, 'remove' ), // callback
+			'mediaelements-settings',
+			'mediaelements-settings-features',
+		);		
+		
+		
+		
 		add_settings_field(
 			'advanced', // id
 			__('Advanced','media-element'), // title
@@ -185,11 +229,28 @@ function advanced_info(){
 		if ( isset( $input['extra'] ) ) {
 			$sanitary_values['extra'] = sanitize_text_field( $input['extra'] );		
 		}
+		if ( isset( $input['remove'] ) ) {
+			$sanitary_values['remove'] = sanitize_text_field( $input['remove'] );		
+		}
+		if ( isset( $input['poster'] ) ) {
+			$sanitary_values['poster'] = sanitize_text_field( $input['poster'] );		
+		}
 		
 		
 		return $sanitary_values;
 	}
-	
+	function remove(){
+		printf(
+			'<input class="regular-text" type="checkbox" name="mediaelementjs[remove]" id="remove" %s value="1"> Remove width / height attribute in video (Classic editor only)',
+			isset( $this->settings['remove'] ) ? 'checked' : ''
+		);
+	}
+	function poster(){
+		printf(
+			'<input class="regular-text" type="checkbox" name="mediaelementjs[poster]" id="poster" %s value="1"> Use featured image as poster when no poster has been set? (Classic editor only)',
+			isset( $this->settings['poster'] ) ? 'checked' : ''
+		);
+	}	
 	function features(){
 		printf(
 			'<input class="regular-text" type="text" name="mediaelementjs[features]" id="features" value="%s">',

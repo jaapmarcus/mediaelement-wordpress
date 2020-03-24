@@ -1,3 +1,5 @@
+/* Correction for height of audio player */
+/* Default Audio player is 30px height*/
 .wp-audio-shortcode, audio{
 	height: 40px;
 }

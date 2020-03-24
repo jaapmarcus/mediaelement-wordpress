@@ -31,16 +31,15 @@ How ever when you edit the html source you can add multiple sources
 
 This plugin uses the default behaviour of the Video and Audio Short tag. How ever Vimeo Support is not enabled by default Please add by default /wp-content/plugins/media-element/dist/renderers/vimeo.min.js on the Settings Page --> Mediaelement JS Settings --> Aditional Plugin / Renderers
 
-
 = Simple Video =
 Basic playback options
 
-    [video src="http://mysite.com/mymedia.mp4" width="640" height="360"]
+    [video src="http://mysite.com/mymedia.mp4"]
 
 = All Attributes Video =
 All options enabled
 
-    [video mp4="http://mysite.com/mymedia.mp4" ogg="http://mysite.com/mymedia.ogg" webm="http://mysite.com/mymedia.webm" poster="http://mysite.com/mymedia.png" preload="true" autoplay="true" width="640" height="264"]
+    [video mp4="http://mysite.com/mymedia.mp4" ogg="http://mysite.com/mymedia.ogg" webm="http://mysite.com/mymedia.webm" poster="http://mysite.com/mymedia.png" preload="true" autoplay="true"]
 
 = Simple Audio =
 Basic playback options

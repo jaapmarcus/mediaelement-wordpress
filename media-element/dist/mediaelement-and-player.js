@@ -4433,6 +4433,9 @@ var MediaElementPlayer = function () {
 				}
 			}(),
 			    aspectRatio = function () {
+				if (!t.options.enableAutosize) {
+					return t.initialAspectRatio;
+				}
 				var ratio = 1;
 				if (!t.isVideo) {
 					return ratio;
