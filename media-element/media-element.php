@@ -10,6 +10,8 @@ Text Domain: media-element
 Domain Path: /languages/
 License: MIT
 */		
+
+define('MEJS_VERSION','4.1.16');
 Class MediaElements {
 	var $options;
 	  function init(){
@@ -20,10 +22,11 @@ Class MediaElements {
 			
 		//Add our own
 		add_action('wp_head',array($this, 'addHeader'));
-		add_action('wp_footer',array($this, 'addFooter'));
+		//incase of loading additional plugins with a second plugin same functions can be used
+		add_action('wp_footer',array($this, 'addFooter'),1);
 		
 		remove_shortcode('video');
-		add_shortcode('video', Array($this, 'Video'));
+		add_shortcode('video', Array($this, 'Video'),8);
 	}
 	
 	  public function Video($args, $content = ''){
@@ -46,16 +49,23 @@ Class MediaElements {
 	}	
 	
 	  public function addHeader(){
-		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/files/mediaelementplayer.css"), array(), "4.2.14", false);
-		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css?random=".rand(0,100000)), array(), "4.2.14", false);
+		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/dist/mediaelementplayer.css"), array(), MEJS_VERSION, false);
+		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css"), array(), MEJS_VERSION, false);
+		$scripts = explode(',',$this -> options['css']);
+		//also support loading css
+		foreach($scripts as $script){
+			wp_enqueue_style(basename($script), $script,array(), MEJS_VERSION);
+		}		
+		
+		
 	}
 	  public function addFooter(){
-		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/files/mediaelement-and-player.js?random=".rand(0,100000)), array(), "4.2.14");
-		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js?random=".rand(0,100000)), array('jquery'), "4.2.14");
+		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.js?random=".rand(0,100000)), array(), MEJS_VERSION);
+		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), array('jquery'), MEJS_VERSION);
 		
 		$scripts = explode(',',$this -> options['extra']);
 		foreach($scripts as $script){
-			wp_enqueue_script(basename($script), $script,array(), "4.2.14");
+			wp_enqueue_script(basename($script), $script,array(), MEJS_VERSION);
 		}
 		
 		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => $this -> options));
@@ -168,7 +178,14 @@ Class MediaElementsSettings {
 				array( $this, 'extra' ), // callback
 			'mediaelements-settings',
 			'mediaelements-settings-extra',
-		);		
+		);
+		add_settings_field(
+			'css', // id
+			__('Additional Css Files','media-element'), // title
+				array( $this, 'css' ), // callback
+			'mediaelements-settings',
+			'mediaelements-settings-extra',
+		);				
 	
 	}
 
@@ -224,10 +241,15 @@ function advanced_info(){
 			$sanitary_values['features'] = sanitize_text_field( str_replace(' ','',$input['features'] ));		
 		}
 		if ( isset( $input['advanced'] ) ) {
-			$sanitary_values['advanced'] = sanitize_text_field( $input['advanced'] );		
+			$sanitary_values['advanced'] = $input['advanced'];
+			//in some cases mainly advertisign an url needs the be pasted in how very sanitize_text_field breaks it	
+			//posible security issue	
 		}
 		if ( isset( $input['extra'] ) ) {
 			$sanitary_values['extra'] = sanitize_text_field( $input['extra'] );		
+		}
+		if ( isset( $input['css'] ) ) {
+			$sanitary_values['css'] = sanitize_text_field( $input['csss'] );		
 		}
 		if ( isset( $input['remove'] ) ) {
 			$sanitary_values['remove'] = sanitize_text_field( $input['remove'] );		
@@ -270,7 +292,12 @@ function advanced_info(){
 			isset( $this->settings['extra'] ) ? esc_attr( $this->settings['extra']) : ''
 		);
 	}	
-
+	function css(){
+		printf(
+			'<textarea class="regular-text" type="text" name="mediaelementjs[css]" id="css">%s</textarea>',
+			isset( $this->settings['css'] ) ? esc_attr( $this->settings['css']) : ''
+		);
+	}
 	function SettingsPage(){
 		?>
 		<div class="">

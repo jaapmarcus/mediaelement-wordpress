@@ -1,7 +1,7 @@
 === MediaElement.js - HTML5 Video & Audio Player ===
 Contributors: johndyer jaapmarcus
 Donate link: http://mediaelementjs.com/
-Tags: html5, video, audio, player, flash, mp4, mp3, ogg, webm, wmv, captions, subtitles, websrt, srt, accessible, Silverlight, javascript,
+Tags: html5, video, audio, player, mp4, mp3, ogg, webm, wmv, captions, subtitles, websrt, srt, accessible, javascript,
 Requires at least: 2.9
 Tested up to: 4.9
 Stable tag: 4.2.8
@@ -19,8 +19,6 @@ Check out <a href="http://mediaelementjs.com/">mediaElementjs.com</a> for more i
 == Guteberg Support ==
 
 This plugin will convert all Gutenberg Video and Audio block to Mediaelement JS video player. This plugin will support the default video block. 
-
-
 
 = Multiple sources =
 
@@ -51,7 +49,6 @@ All options enabled
 
     [audio mp3="http://mysite.com/mymedia.mp3" ogg="http://mysite.com/mymedia.ogg" preload="true" autoplay="true"]
 
-
 ###  Use in a template
 You can use Wordpress shortcodes in your templates using the do_shortcode function.
 
@@ -71,7 +68,6 @@ View <a href="http://mediaelementjs.com/">MediaElementjs.com</a> for more inform
 For change log MediaelementJS See https://github.com/mediaelement/mediaelement/blob/master/changelog.md
 
 
-
 == Upgrade Notice ==
 
 None
@@ -88,7 +84,13 @@ Most HTML5 players offer one player to modern browsers and then a competely sepa
 
 Instead, MediaElement.js upgrades older browsers, using Flash to mimic the entire HTML5 Media API. Then once all the browsers have something that looks like HTML5 Media, we build a consistent player on top using just HTML and CSS.
 
-See original blog post at <a href="http://johndyer.name/post/MediaElement-js-a-magic-unicorn-HTML5-video-library.aspx">johndyer.name</a> for a full explanation of MediaElement.js
+== Why dropping Flash / Silverlight support ==
+
+There are better alternatives and Flash support for a major browsers will stop soon. How every if you still want to use Flash. Download <a href="https://github.com/mediaelement/mediaelement">here</a> and copy the build folder in the /build/ folder and add 	{pluginPath : mediaelementjs.pluginPath} to the advanced option.
+
+== Does this plugin support Youtube, Facebook and maybe other third parties renderers/ ==
+
+Yes by default MediaElementJS support <a href="https://github.com/mediaelement/mediaelement/blob/master/docs/usage.md#renderers-usage">support</a>. 
 
 == Screenshots  ==
 

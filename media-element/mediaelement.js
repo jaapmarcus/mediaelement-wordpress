@@ -15,7 +15,7 @@ jQuery( document ).ready( function(){
 				
 			var settings = { 
 				stretching : "responsive",
-				pluginPath : mediaelementjs.pluginPath
+				enableAutosize : false
 			}
 		
 			//console.log(mediaelementjs.options.features);
@@ -38,14 +38,13 @@ jQuery( document ).ready( function(){
 			//console.log(newSettings);
 			
 	player =  new MediaElementPlayer(this.id,newSettings);
-	console.log(newSettings);
 
 	});
 jQuery('audio').each( function (){
-	//new Gutenberg videos/audio don't recive an Id just create one a 36 string should be unique enough
+	//new Gutenberg videos/audio don't recive an Id just create a unique string should be unique enough
 	if(this.id == ''){
 		//make sure its unique
-		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);		
+		this.id = 'video-'+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 10);		
 	}
 		//videos with the Gutenberg editor will break when this is not used as WP calculates ratio by height/width
 		jQuery(this).attr('height',this.offsetHeight);
