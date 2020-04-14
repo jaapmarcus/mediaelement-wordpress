@@ -13,10 +13,13 @@ License: MIT
 
 define('MEJS_VERSION','4.1.16');
 Class MediaElements {
-	var $options;
+	
+	var $options = '';
 	  function init(){
 		
-		$this -> options = get_option('mediaelementjs');
+		$opt = get_option('mediaelementjs');
+		$default = array('playsinline' => false, 'poster' => false, 'remove' => false, 'css' => array(), 'extra' => array(), 'features' => '', 'advanced' => '');
+		$this -> options = array_merge( $default, $opt); 
 		//remove WP Media Elements 
 		wp_deregister_script('mediaelement');
 			
@@ -44,8 +47,12 @@ Class MediaElements {
 			unset($args['width'],$args['height']);	
 		}
 		
-		return wp_video_shortcode( $args, $content);
-		
+		$output = wp_video_shortcode( $args, $content);
+		if($this -> options['playsinline']){
+			return str_replace('<video ', '<video playsinline ', $output);
+		}else{
+			return $output;
+		}
 	}	
 	
 	  public function addHeader(){
@@ -60,7 +67,7 @@ Class MediaElements {
 		
 	}
 	  public function addFooter(){
-		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.js?random=".rand(0,100000)), array(), MEJS_VERSION);
+		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.js"), array(), MEJS_VERSION);
 		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), array('jquery'), MEJS_VERSION);
 		
 		$scripts = explode(',',$this -> options['extra']);
@@ -159,7 +166,13 @@ Class MediaElementsSettings {
 			'mediaelements-settings',
 			'mediaelements-settings-features',
 		);		
-		
+		add_settings_field(
+			'playsinline', // id
+			__('Plays Inline','media-element'), // title
+				array( $this, 'playsinline' ), // callback
+			'mediaelements-settings',
+			'mediaelements-settings-features',
+		);		
 		
 		
 		add_settings_field(
@@ -257,6 +270,10 @@ function advanced_info(){
 		if ( isset( $input['poster'] ) ) {
 			$sanitary_values['poster'] = sanitize_text_field( $input['poster'] );		
 		}
+		if ( isset( $input['playsinline'] ) ) {
+			$sanitary_values['playsinline'] = sanitize_text_field( $input['playsinline'] );		
+		}
+		
 		
 		
 		return $sanitary_values;
@@ -272,7 +289,13 @@ function advanced_info(){
 			'<input class="regular-text" type="checkbox" name="mediaelementjs[poster]" id="poster" %s value="1"> Use featured image as poster when no poster has been set? (Classic editor only)',
 			isset( $this->settings['poster'] ) ? 'checked' : ''
 		);
-	}	
+	}
+	function playsinline(){
+		printf(
+			'<input class="regular-text" type="checkbox" name="mediaelementjs[playsinline]" id="poster" %s value="1"> Add playsinline attribute to video tag? (Classic editor only)',
+			isset( $this->settings['playsinline'] ) ? 'checked' : ''
+		);
+	}		
 	function features(){
 		printf(
 			'<input class="regular-text" type="text" name="mediaelementjs[features]" id="features" value="%s">',
