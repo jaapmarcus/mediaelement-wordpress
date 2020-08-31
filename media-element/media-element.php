@@ -262,7 +262,7 @@ function advanced_info(){
 			$sanitary_values['extra'] = sanitize_text_field( $input['extra'] );		
 		}
 		if ( isset( $input['css'] ) ) {
-			$sanitary_values['css'] = sanitize_text_field( $input['csss'] );		
+			$sanitary_values['css'] = sanitize_text_field( $input['css'] );		
 		}
 		if ( isset( $input['remove'] ) ) {
 			$sanitary_values['remove'] = sanitize_text_field( $input['remove'] );		
@@ -273,9 +273,7 @@ function advanced_info(){
 		if ( isset( $input['playsinline'] ) ) {
 			$sanitary_values['playsinline'] = sanitize_text_field( $input['playsinline'] );		
 		}
-		
-		
-		
+				
 		return $sanitary_values;
 	}
 	function remove(){
