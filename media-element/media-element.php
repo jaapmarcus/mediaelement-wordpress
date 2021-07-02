@@ -19,7 +19,11 @@ Class MediaElements {
 		
 		$opt = get_option('mediaelementjs');
 		$default = array('playsinline' => false, 'poster' => false, 'remove' => false, 'css' => array(), 'extra' => array(), 'features' => '', 'advanced' => '');
-		$this -> options = array_merge( $default, $opt); 
+        if(is_array($opt)){
+            $this -> options = array_merge( $default, $opt);             
+        }else{
+		    $this -> options = $default;
+        }
 		//remove WP Media Elements 
 		wp_deregister_script('mediaelement');
 			
@@ -58,23 +62,25 @@ Class MediaElements {
 	  public function addHeader(){
 		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/dist/mediaelementplayer.css"), array(), MEJS_VERSION, false);
 		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css"), array(), MEJS_VERSION, false);
-		$scripts = explode(',',$this -> options['css']);
-		//also support loading css
-		foreach($scripts as $script){
-			wp_enqueue_style(basename($script), $script,array(), MEJS_VERSION);
-		}		
+        if(!empty($this -> options['css'])){
+            $scripts = explode(',',$this -> options['css']);
+            //also support loading css
+            foreach($scripts as $script){
+                wp_enqueue_style(basename($script), $script,array(), MEJS_VERSION);
+            }		
+        }		
 		
 		
 	}
 	  public function addFooter(){
 		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.js"), array(), MEJS_VERSION);
 		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), array('jquery'), MEJS_VERSION);
-		
-		$scripts = explode(',',$this -> options['extra']);
-		foreach($scripts as $script){
-			wp_enqueue_script(basename($script), $script,array(), MEJS_VERSION);
-		}
-		
+		if(!empty($this -> options['extra'])){
+    		$scripts = explode(',',$this -> options['extra']);
+    		foreach($scripts as $script){
+    			wp_enqueue_script(basename($script), $script,array(), MEJS_VERSION);
+    		}
+        }
 		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => $this -> options));
 		
 		
