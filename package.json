@@ -1,0 +1,27 @@
+{
+  "name": "mediaelement-wordpress",
+  "version": "7.0.0",
+  "description": "MediaElements plugin for Wordpress uses latest upstream from source",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaapmarcus/mediaelement-wordpress.git"
+  },
+  "keywords": [
+    "mediaelements",
+    "js",
+    "video"
+  ],
+  "author": "Jaap Marcus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaapmarcus/mediaelement-wordpress/issues"
+  },
+  "homepage": "https://github.com/jaapmarcus/mediaelement-wordpress#readme",
+  "dependencies": {
+    "mediaelement": "^7.0.0"
+  }
+}

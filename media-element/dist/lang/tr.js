@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Turkish
@@ -10,11 +10,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-    if (exports.tr === undefined) {
+    'use strict';    if (exports.tr === undefined) {
         exports.tr = {
             'mejs.plural-form': 1,            
             'mejs.download-file': 'Dosyayı İndir',            
-            'mejs.install-flash': 'Flash oynatıcısı etkin olmayan veya yüklü olmayan bir tarayıcı kullanıyorsunuz. Lütfen Flash player eklentinizi açın veya en son sürümü https://get.adobe.com/flashplayer/ adresinden indirin.',            
             'mejs.fullscreen': 'Tam ekran',            
             'mejs.play': 'Oynat',
             'mejs.pause': 'Duraklat',            

@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Romanian
@@ -10,11 +10,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.ro === undefined) {
+    'use strict';	if (exports.ro === undefined) {
 		exports.ro = {
 			'mejs.plural-form': 5,			
 			'mejs.download-file': 'Descarcă fişierul',			
-			'mejs.install-flash': 'Utilizați un browser care nu are activat sau instalat playerul Flash. Porniți pluginul Flash player sau descărcați cea mai recentă versiune de la https://get.adobe.com/flashplayer/',			
 			'mejs.fullscreen': 'Ecran complet',			
 			'mejs.play': 'Redare',
 			'mejs.pause': 'Pauză',			

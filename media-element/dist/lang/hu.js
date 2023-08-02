@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Hungarian
@@ -10,11 +10,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.hu === undefined) {
+    'use strict';	if (exports.hu === undefined) {
 		exports.hu = {
 			'mejs.plural-form': 1,			
 			'mejs.download-file': 'Fájl letöltése',			
-			'mejs.install-flash': 'Olyan böngészőt használ, amelyhez nincs engedélyezve vagy telepítve a Flash player. Kérjük, kapcsolja be a Flash-lejátszó bővítményét, vagy töltse le a legfrissebb verziót a https://get.adobe.com/flashplayer/ címen',			
 			'mejs.fullscreen': 'Teljes képernyő',			
 			'mejs.play': 'Lejátszás',
 			'mejs.pause': 'Szünet',			

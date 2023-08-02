@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Japanese
@@ -10,11 +10,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.ja === undefined) {
+    'use strict';	if (exports.ja === undefined) {
 		exports.ja = {
 			'mejs.plural-form': 0,			
 			'mejs.download-file': 'ファイルをダウンロードする',			
-			'mejs.install-flash': 'Flash Playerが有効またはインストールされていないブラウザを使用しています。Flash Playerプラグインをオンにするか,https://get.adobe.com/flashplayer/から最新バージョンをダウンロードしてください。',			
 			'mejs.fullscreen': '全画面',			
 			'mejs.play': '再生',
 			'mejs.pause': '一時停止',			

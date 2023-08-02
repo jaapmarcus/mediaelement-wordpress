@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Catalan
@@ -9,11 +9,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.ca === undefined) {
+    'use strict';	if (exports.ca === undefined) {
 		exports.ca = {
 			'mejs.plural-form': 1,			
 			'mejs.download-file': 'Descarregar arxiu',			
-			'mejs.install-flash': 'Esteu utilitzant un navegador que no tingui Flash Player activat o instal·lat. Activeu el vostre complement Flash Player o descarregueu la versió més recent de https://get.adobe.com/flashplayer/',			
 			'mejs.fullscreen': 'Pantalla completa',			
 			'mejs.play': 'Reproducció',
 			'mejs.pause': 'Pausa',			

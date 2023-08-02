@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Croatian
@@ -7,11 +7,10 @@
  *   Hrvoj3e (hrvoj3e@gmail.com) * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.hr === undefined) {
+    'use strict';	if (exports.hr === undefined) {
 		exports.hr = {
 			'mejs.plural-form': 7,			
 			'mejs.download-file': 'Preuzmi datoteku',			
-			'mejs.install-flash': 'Koristite preglednik koji nema omogućen ili instaliran Flash preglednik. Molimo Vas uključite Flash dodatak ili preuzmite najnoviju verziju s https://get.adobe.com/flashplayer/',			
 			'mejs.fullscreen': 'Puni zaslon',			
 			'mejs.play': 'Pokreni',
 			'mejs.pause': 'Zaustavi',			

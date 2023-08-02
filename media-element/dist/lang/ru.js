@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Russian
@@ -10,11 +10,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.ru === undefined) {
+    'use strict';	if (exports.ru === undefined) {
 		exports.ru = {
 			'mejs.plural-form': 7,			
 			'mejs.download-file': 'Скачать файл',			
-			'mejs.install-flash': 'Flash player в вашем браузере не установлен или отключен. Пожалуйста включите ваш Flash player или скачайте последнюю версию с https://get.adobe.com/flashplayer/',			
 			'mejs.fullscreen': 'Полноэкранный режим',			
 			'mejs.play': 'Воспроизвести',
 			'mejs.pause': 'Пауза',			

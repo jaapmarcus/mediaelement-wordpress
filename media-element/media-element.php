@@ -11,7 +11,7 @@ Domain Path: /languages/
 License: MIT
 */		
 
-define('MEJS_VERSION','4.1.16');
+define('MEJS_VERSION','7.0.0');
 Class MediaElements {
 	
 	var $options = '';

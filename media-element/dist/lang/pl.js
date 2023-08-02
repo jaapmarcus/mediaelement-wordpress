@@ -1,4 +1,4 @@
-'use strict';/*!
+/*!
  * This is a `i18n` language object.
  *
  * Polish
@@ -10,11 +10,10 @@
  * @see core/i18n.js
  */
 (function (exports) {
-	if (exports.pl === undefined) {
+    'use strict';	if (exports.pl === undefined) {
 		exports.pl = {
 			'mejs.plural-form': 9,			
 			'mejs.download-file': 'Pobierz plik',			
-			'mejs.install-flash': 'Twoja przeglądarka nie ma włączonej lub zainstalowanej wtyczki Flash Player. Prosimy ją włączyć lub pobrać najnowszą wersję ze strony https://get.adobe.com/flashplayer/',			
 			'mejs.fullscreen': 'Pełny ekran',			
 			'mejs.play': 'Odtwarzaj',
 			'mejs.pause': 'Wstrzymaj',			
