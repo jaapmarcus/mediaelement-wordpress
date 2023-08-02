@@ -4,8 +4,8 @@ Plugin Name: MediaElement.js - HTML5 Audio and Video
 Plugin URI: https://mediaelementjs.com/
 Description: Video and audio plugin for WordPress built on MediaElement.js HTML5 video and audio player library. Embeds media in your post or page using HTML5 with Flash or Silverlight fallback support for non-HTML5 browsers. Video support: MP4, Ogg, WebM, WMV. Audio support: MP3, WMA, WAV
 Author: John Dyer, Jaap Marcus
-Version: 4.2.8
-Author URI: https://mediaelementjs.com/
+Version: 7.0.0
+Author URI: https://www.mediaelementjs.com/
 Text Domain: media-element
 Domain Path: /languages/
 License: MIT
@@ -15,15 +15,22 @@ define('MEJS_VERSION','7.0.0');
 Class MediaElements {
 	
 	var $options = '';
-	  function init(){
+		function init(){
 		
 		$opt = get_option('mediaelementjs');
 		$default = array('playsinline' => false, 'poster' => false, 'remove' => false, 'css' => array(), 'extra' => array(), 'features' => '', 'advanced' => '');
-        if(is_array($opt)){
-            $this -> options = array_merge( $default, $opt);             
-        }else{
-		    $this -> options = $default;
-        }
+				if(is_array($opt)){
+						$this -> options = array_merge( $default, $opt);
+						if($this -> options['advanced'] == ''){
+							$this -> options['advanced'] = json_encode(array('iconSprite' => plugins_url("media-element/dist/mejs-controls.svg")));
+						}else{
+							$advanced_options = json_decode($this -> options['advanced'], true);
+							$sprite=array('iconSprite' => plugins_url("media-element/dist/mejs-controls.svg"));
+							$this -> options['advanced'] = json_encode(array_merge($sprite, $advanced_options));
+						}            
+				}else{
+				$this -> options = $default;
+				}
 		//remove WP Media Elements 
 		wp_deregister_script('mediaelement');
 			
@@ -36,7 +43,7 @@ Class MediaElements {
 		add_shortcode('video', Array($this, 'Video'),8);
 	}
 	
-	  public function Video($args, $content = ''){
+		public function Video($args, $content = ''){
 		global $post;
 		if(!empty($this -> options['poster'])){
 		if(empty($args['poster'])){
@@ -59,28 +66,28 @@ Class MediaElements {
 		}
 	}	
 	
-	  public function addHeader(){
-		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/dist/mediaelementplayer.css"), array(), MEJS_VERSION, false);
+		public function addHeader(){
+		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/dist/mediaelementplayer.min.css"), array(), MEJS_VERSION, false);
 		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css"), array(), MEJS_VERSION, false);
-        if(!empty($this -> options['css'])){
-            $scripts = explode(',',$this -> options['css']);
-            //also support loading css
-            foreach($scripts as $script){
-                wp_enqueue_style(basename($script), $script,array(), MEJS_VERSION);
-            }		
-        }		
+				if(!empty($this -> options['css'])){
+						$scripts = explode(',',$this -> options['css']);
+						//also support loading css
+						foreach($scripts as $script){
+								wp_enqueue_style(basename($script), $script,array(), MEJS_VERSION);
+						}		
+				}		
 		
 		
 	}
-	  public function addFooter(){
-		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.js"), array(), MEJS_VERSION);
+		public function addFooter(){
+		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.min.js"), array(), MEJS_VERSION);
 		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), array('jquery'), MEJS_VERSION);
 		if(!empty($this -> options['extra'])){
-    		$scripts = explode(',',$this -> options['extra']);
-    		foreach($scripts as $script){
-    			wp_enqueue_script(basename($script), $script,array(), MEJS_VERSION);
-    		}
-        }
+				$scripts = explode(',',$this -> options['extra']);
+				foreach($scripts as $script){
+					wp_enqueue_script(basename($script), $script,array(), MEJS_VERSION);
+				}
+				}
 		wp_localize_script('mediaelementjs', 'mediaelementjs', array('pluginPath' => plugins_url(), 'options' => $this -> options));
 		
 		
@@ -345,8 +352,4 @@ function advanced_info(){
 
 if(is_admin()){
 	$media = new MediaElementsSettings();
-}
-
-
-	
-?>
+}	
