@@ -33,6 +33,8 @@ Class MediaElements {
 				}
 		//remove WP Media Elements 
 		wp_deregister_script('mediaelement');
+		wp_deregister_style('wp-mediaelement');
+		wp_deregister_script('wp-mediaelement');
 			
 		//Add our own
 		add_action('wp_head',array($this, 'addHeader'));
@@ -81,7 +83,7 @@ Class MediaElements {
 	}
 		public function addFooter(){
 		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.min.js"), array(), MEJS_VERSION);
-		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), array('jquery'), MEJS_VERSION);
+		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), MEJS_VERSION);
 		if(!empty($this -> options['extra'])){
 				$scripts = explode(',',$this -> options['extra']);
 				foreach($scripts as $script){
