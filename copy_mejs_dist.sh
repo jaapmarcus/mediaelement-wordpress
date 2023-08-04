@@ -27,3 +27,6 @@ rm -f ./media-element/dist/renderers/soundcloud.js
 rm -f ./media-element/dist/renderers/twitch.js
 rm -f ./media-element/dist/renderers/vimeo.js
 rm -f ./media-element/dist/renderers/youtube.js
+
+npx postcss media-element/mediaelement.css > media-element/mediaelement.min.css
+./node_modules/esbuild/bin/esbuild media-element/mediaelement.js --outfile=media-element/mediaelement.min.js --minify
