@@ -70,7 +70,7 @@ Class MediaElements {
 	
 		public function addHeader(){
 		wp_enqueue_style('mediaelementjs-styles', plugins_url("media-element/dist/mediaelementplayer.min.css"), array(), MEJS_VERSION, false);
-		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.css"), array(), MEJS_VERSION, false);
+		wp_enqueue_style('mediaelementjs-style', plugins_url("media-element/mediaelement.min.css"), array(), MEJS_VERSION, false);
 				if(!empty($this -> options['css'])){
 						$scripts = explode(',',$this -> options['css']);
 						//also support loading css
@@ -83,7 +83,7 @@ Class MediaElements {
 	}
 		public function addFooter(){
 		wp_enqueue_script('mediaelementjs-player-test', plugins_url("media-element/dist/mediaelement-and-player.min.js"), array(), MEJS_VERSION);
-		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.js"), MEJS_VERSION);
+		wp_enqueue_script('mediaelementjs', plugins_url("media-element/mediaelement.min.js"), array(), MEJS_VERSION);
 		if(!empty($this -> options['extra'])){
 				$scripts = explode(',',$this -> options['extra']);
 				foreach($scripts as $script){
